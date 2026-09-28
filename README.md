@@ -24,6 +24,8 @@ model, attack methodology, findings format, mitigations, and links to every tool
 referenced. Depth over breadth — three of these done thoroughly and documented well outperform all
 five done superficially.
 
+Implementation plans are kept in [`docs/superpowers/plans/`](docs/superpowers/plans/).
+
 ## Standards and Frameworks Referenced
 
 | Framework | Use | Link |

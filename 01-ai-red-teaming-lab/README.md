@@ -3,6 +3,9 @@
 A repeatable, automated lab for attacking a language-model application — repeatable is what
 separates a professional assessment from a one-off clever prompt.
 
+See the [implementation plan](../docs/superpowers/plans/2026-09-28-ai-red-teaming-lab.md) for the
+planned build sequence and verification steps.
+
 ## Business Scenario
 
 A fictional customer-support chatbot for "Northwind Retail," built on a local model (via
