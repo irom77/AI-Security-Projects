@@ -41,6 +41,11 @@ class FindingRecord:
     residual_risk: str
     owasp_mapping: list[str]
     mitre_atlas_mapping: list[str]
+    status: str = "review_required"
+    reason: str = ""
+    confidence: str = "low"
+    matched_indicators: list[str] | None = None
+    severity: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

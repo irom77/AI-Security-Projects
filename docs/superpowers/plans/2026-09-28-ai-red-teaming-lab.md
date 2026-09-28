@@ -176,27 +176,29 @@
 - CLI: `python -m tools.run_attacks --base-url ... --mode vulnerable|controlled --output results/<run>.jsonl`.
 - CLI: `python -m tools.report_results results/<run>.jsonl --markdown results/<run>.md`.
 
-- [ ] **Step 1: Write failing runner tests**
+**Status:** Complete — deterministic HTTP runner, raw evidence capture, JSONL output, Markdown reporting, and error-path handling implemented.
+
+- [x] **Step 1: Write failing runner tests**
 
   Use an HTTP fixture to assert one record per case, correlation IDs, preserved raw response references, deterministic ordering, timeout/error records, and nonzero exit status when a configured blocking finding occurs.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_run_attacks.py -q`
 
   Expected: FAIL because the runner does not exist.
 
-- [ ] **Step 3: Implement the runner and report formatter**
+- [x] **Step 3: Implement the runner and report formatter**
 
   Write JSONL as the machine-readable source of truth, put raw response bodies in a run-specific evidence directory, and generate a concise Markdown summary linking each finding to evidence and mappings. Avoid putting the fake secret in filenames or summary text unless the finding evidence explicitly requires it.
 
-- [ ] **Step 4: Run tests and a local fake-target smoke test**
+- [x] **Step 4: Run tests and a local fake-target smoke test**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_run_attacks.py -q`
 
   Expected: PASS, including error-path tests.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/tools 01-ai-red-teaming-lab/tests
