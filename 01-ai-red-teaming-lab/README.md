@@ -6,8 +6,8 @@ separates a professional assessment from a one-off clever prompt.
 See the [implementation plan](../docs/superpowers/plans/2026-09-28-ai-red-teaming-lab.md) for the
 planned build sequence and verification steps.
 
-**Status:** In progress — 4 of 10 implementation tasks complete. Next: Task 5, Promptfoo
-integration for fast red-team coverage.
+**Status:** In progress — 5 of 10 implementation tasks complete. Next: Task 6, Garak integration
+against the chatbot endpoint.
 
 ## Business Scenario
 

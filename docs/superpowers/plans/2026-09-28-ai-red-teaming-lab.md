@@ -207,6 +207,8 @@
 
 ### Task 5: Integrate Promptfoo for fast red-team coverage
 
+**Status:** Complete — Promptfoo provider, catalogue matrix, stable assertions, versioned JSON output, and local filtering implemented and verified.
+
 **Files:**
 - Create: `01-ai-red-teaming-lab/promptfoo/promptfooconfig.yaml`
 - Create: `01-ai-red-teaming-lab/promptfoo/prompts.yaml`
@@ -218,27 +220,27 @@
 - Provider forwards each Promptfoo prompt to `POST /chat` and returns response text plus metadata.
 - Promptfoo assertions fail on fake-secret disclosure, system-prompt disclosure, or unsafe output indicators and record refusal as an acceptable result for protected cases.
 
-- [ ] **Step 1: Write configuration validation tests**
+- [x] **Step 1: Write configuration validation tests**
 
   Assert all attack IDs are represented, the provider URL is environment-configurable, and assertions reference the stable scoring rules rather than brittle exact response text.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_promptfoo_config.py -q`
 
   Expected: FAIL until the Promptfoo files exist.
 
-- [ ] **Step 3: Implement the fast suite**
+- [x] **Step 3: Implement the fast suite**
 
   Include a small, CI-sized matrix covering all catalogue categories, with a larger local matrix available through a command-line filter. Configure JSON output under `results/promptfoo/` and preserve the Promptfoo version in the run metadata.
 
-- [ ] **Step 4: Run the suite against deterministic mode**
+- [x] **Step 4: Run the suite against deterministic mode**
 
   Run: `cd 01-ai-red-teaming-lab && npx promptfoo eval -c promptfoo/promptfooconfig.yaml --no-cache`
 
   Expected: the vulnerable baseline demonstrates expected failures; controlled mode passes the blocking assertions after Task 8.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/promptfoo 01-ai-red-teaming-lab/tests

@@ -1,0 +1,3 @@
+# The test matrix supplies attack_prompt for each catalogue case.
+# Keeping the prompt template separate makes local variants easy to add.
+- "{{ attack_prompt }}"
