@@ -26,6 +26,8 @@ and isolated systems only.
 Keep both the root README and the affected project README current whenever scope, architecture,
 status, deliverables, or implementation evidence changes. Update links, checklists, and status
 labels in the same change that makes the underlying change.
+For planned multi-task work, show the completed-task count and the next task in both README files;
+derive the count from the implementation plan rather than memory.
 
 ## Plans and implementation
 

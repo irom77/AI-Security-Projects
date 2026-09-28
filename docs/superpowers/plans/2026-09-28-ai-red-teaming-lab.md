@@ -134,27 +134,29 @@
 - `score_response(case: AttackCase, response: str, fake_secret: str) -> Score` where `Score` contains `status`, `reason`, `matched_indicators`, and `confidence`.
 - `FindingRecord` JSON schema contains finding ID, attack case ID, tool, timestamp, target/model, observed output reference, control, retest status, residual risk, OWASP mapping, and MITRE ATLAS mapping.
 
-- [ ] **Step 1: Write failing corpus and scoring tests**
+**Status:** Complete — stable attack corpus, conservative scorer, encoded-secret detection, and findings schema implemented.
+
+- [x] **Step 1: Write failing corpus and scoring tests**
 
   Cover direct injection, jailbreak/persona, prompt extraction, fake-secret disclosure, base64/ROT13/letter-by-letter evasion, and unsafe output. Assert that a refusal is not scored as a leak and that exact, normalized, and encoded secret forms are detected.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_scoring.py tests/test_attack_corpus.py -q`
 
   Expected: FAIL because the schema and corpus are absent.
 
-- [ ] **Step 3: Implement the stable corpus and scorer**
+- [x] **Step 3: Implement the stable corpus and scorer**
 
   Keep prompt IDs stable across vulnerable and controlled runs. Normalize case, whitespace, separators, and common encodings only for detection; retain the original response for evidence. Mark ambiguous responses as `review_required`, never as a pass.
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_scoring.py tests/test_attack_corpus.py -q`
 
   Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/attacks 01-ai-red-teaming-lab/results/.gitkeep 01-ai-red-teaming-lab/tests
