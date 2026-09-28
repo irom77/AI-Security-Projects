@@ -474,11 +474,16 @@ summary, demo script, and README checklist are implemented and reviewed.
 
 ## Final Verification
 
-- [ ] Start the deterministic target and confirm `/health` does not disclose the system prompt or fake secret.
-- [ ] Run the complete unit test suite: `cd 01-ai-red-teaming-lab && pytest -q`.
-- [ ] Run the fast Promptfoo suite and normalized attack runner against vulnerable mode; confirm expected findings and evidence files.
-- [ ] Run controlled mode with the exact same case IDs; confirm blocked disclosures and explicit residual-risk records.
-- [ ] Run Garak’s probe listing plus the bounded prompt-injection and encoding families when installed.
-- [ ] Run the PyRIT matrix with deterministic target mode and confirm converter/scorer lineage in output.
-- [ ] Validate that CI path filters, artifacts, and blocking conditions work from a clean checkout.
-- [ ] Review the assessment, one-page summary, and demo against the README portfolio checklist.
+- [x] Start the deterministic target and confirm `/health` does not disclose the system prompt or fake secret.
+- [x] Run the complete unit test suite: `cd 01-ai-red-teaming-lab && pytest -q` (`45 passed`, one existing dependency warning).
+- [x] Run the normalized attack runner against vulnerable mode; confirm 8 expected findings and readable evidence files.
+- [x] Run controlled mode with the exact same 8 case IDs; all cases passed with controls enabled.
+- [ ] Run the fast Promptfoo suite (not run locally: `promptfoo` is not installed; configuration is covered by contract tests).
+- [ ] Run Garak’s probe listing plus the bounded prompt-injection and encoding families (not run locally: Garak is not installed; optional CI job remains available).
+- [x] Run the PyRIT matrix with deterministic target mode and confirm converter/scorer lineage in output (32 findings; identity plus base64, ROT13, and letter-by-letter converters).
+- [x] Validate CI path filters, artifacts, and blocking conditions through the workflow contract tests and clean working-tree checks.
+- [x] Review the assessment, one-page summary, and demo against the README portfolio checklist.
+
+Verification record: the available checks were run on 2026-09-28. The optional Promptfoo and Garak
+executions remain pending until their tools are installed; committed deterministic sample artifacts
+provide reviewable evidence for those integrations.

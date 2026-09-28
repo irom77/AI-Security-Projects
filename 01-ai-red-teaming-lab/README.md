@@ -82,9 +82,9 @@ result. The retest evidence is the deliverable, not the fix itself.
 
 ## Portfolio Checklist
 
-- [ ] Chatbot code + system prompt (with fake secret) in `app/`
-- [ ] Garak hit-log and Promptfoo/PyRIT run outputs in `results/`
-- [ ] GitHub Actions workflow that reruns probes on change
+- [x] Chatbot code + system prompt (with fake secret) in `app/`
+- [x] Garak hit-log and Promptfoo/PyRIT run outputs in `results/` (sample artifacts committed; live Garak is optional)
+- [x] GitHub Actions workflow that reruns probes on change
 - [x] Written [assessment](report/assessment.md): scope, methodology, findings with evidence,
       risk ratings, affected assets, recommended controls, retest results
 - [x] Findings mapped to OWASP LLM01 / LLM02 / LLM07 and relevant [MITRE ATLAS](https://atlas.mitre.org/) techniques
