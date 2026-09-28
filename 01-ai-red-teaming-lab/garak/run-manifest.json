@@ -1,0 +1,9 @@
+{
+  "tool": "garak",
+  "version": "0.15.1",
+  "command": "garak --model_type generator.NorthwindGenerator --model_name northwind --probes ${GARAK_PROBES:-promptinject,encoding} --report_prefix ${RESULTS_DIR:-results/garak}/northwind --parallel_requests 1",
+  "target": "${TARGET_URL:-http://127.0.0.1:8000}",
+  "results_dir": "${RESULTS_DIR:-results/garak}",
+  "default_probes": ["promptinject", "encoding"],
+  "evidence_format": "garak-report-and-hitlog"
+}

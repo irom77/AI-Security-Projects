@@ -249,6 +249,8 @@
 
 ### Task 6: Integrate Garak against the chatbot endpoint
 
+**Status:** Complete — Garak-compatible HTTP adapter, bounded probe runner, pinned manifest, and evidence documentation implemented and verified.
+
 **Files:**
 - Create: `01-ai-red-teaming-lab/garak/generator.py`
 - Create: `01-ai-red-teaming-lab/garak/run_garak.sh`
@@ -259,27 +261,27 @@
 - `NorthwindGenerator` implements the Garak generator contract and sends prompts to the target endpoint with run metadata.
 - `garak/run_garak.sh` lists available probes, runs prompt-injection and encoding families first, writes hit-log output to `results/garak/`, and accepts `TARGET_URL`, `GARAK_PROBES`, and `RESULTS_DIR` overrides.
 
-- [ ] **Step 1: Write adapter tests**
+- [x] **Step 1: Write adapter tests**
 
   Test prompt forwarding, target URL configuration, timeout propagation, and preservation of Garak-compatible response metadata without requiring a live Ollama model.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_garak_adapter.py -q`
 
   Expected: FAIL because the adapter is absent.
 
-- [ ] **Step 3: Implement the generator and controlled probe script**
+- [x] **Step 3: Implement the generator and controlled probe script**
 
   Pin the Garak invocation in the README, make probe selection explicit, and capture the exact command plus tool version in an adjacent manifest. Keep broad probe expansion opt-in so CI remains bounded.
 
-- [ ] **Step 4: Run adapter tests and a probe-list smoke check**
+- [x] **Step 4: Run adapter tests and a probe-list smoke check**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_garak_adapter.py -q && bash garak/run_garak.sh --list-probes`
 
   Expected: adapter tests pass and the script prints available probes or an actionable install message.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/garak

@@ -6,8 +6,8 @@ separates a professional assessment from a one-off clever prompt.
 See the [implementation plan](../docs/superpowers/plans/2026-09-28-ai-red-teaming-lab.md) for the
 planned build sequence and verification steps.
 
-**Status:** In progress — 5 of 10 implementation tasks complete. Next: Task 6, Garak integration
-against the chatbot endpoint.
+**Status:** In progress — 6 of 10 implementation tasks complete. Next: Task 7, PyRIT prompt
+orchestration, converters, and scorers.
 
 ## Business Scenario
 
