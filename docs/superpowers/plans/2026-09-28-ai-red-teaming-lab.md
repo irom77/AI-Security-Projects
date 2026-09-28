@@ -91,27 +91,29 @@
 - `POST /chat` accepts `{ "message": string, "session_id": string | null }` and returns response text, model metadata, and a run correlation ID.
 - `GET /health` returns backend availability and configuration status without exposing the secret or system prompt.
 
-- [ ] **Step 1: Write failing target behavior tests**
+**Status:** Complete — chatbot target, fake/Ollama model seam, API contract, and safety-focused diagnostics implemented.
+
+- [x] **Step 1: Write failing target behavior tests**
 
   Test the API contract, health response, explicit system-prompt contents, fake-model deterministic responses, and that normal customer-support questions do not disclose the secret.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_chatbot_api.py tests/test_model_client.py -q`
 
   Expected: FAIL because the target service does not exist.
 
-- [ ] **Step 3: Implement the target and model seam**
+- [x] **Step 3: Implement the target and model seam**
 
   Keep the intentionally vulnerable behavior limited to the lab target. The fake client should return scripted responses for normal questions and attack categories; the Ollama client should make one local request with timeout handling. Do not expose raw system prompts through diagnostics.
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_chatbot_api.py tests/test_model_client.py -q`
 
   Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/app 01-ai-red-teaming-lab/tests
