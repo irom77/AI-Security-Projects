@@ -290,6 +290,9 @@
 
 ### Task 7: Add PyRIT prompt orchestration, converters, and scorers
 
+**Status:** Complete — local PyRIT-shaped target, converter lineage, shared scorer integration,
+CLI JSONL outputs, and component tests implemented and verified.
+
 **Files:**
 - Create: `01-ai-red-teaming-lab/pyrit/target.py`
 - Create: `01-ai-red-teaming-lab/pyrit/orchestrator.py`
@@ -304,27 +307,27 @@
 - `score_pyrit_response(case, response, fake_secret) -> Score` using the shared scoring contract.
 - CLI writes raw PyRIT output and normalized `FindingRecord` JSONL under `results/pyrit/`.
 
-- [ ] **Step 1: Write component tests**
+- [x] **Step 1: Write component tests**
 
   Test target forwarding, encoding converters, scorer behavior for refusal versus disclosure, and matrix coverage across all stable case IDs using a fake target.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_pyrit_components.py -q`
 
   Expected: FAIL because the PyRIT integration is absent.
 
-- [ ] **Step 3: Implement the PyRIT integration**
+- [x] **Step 3: Implement the PyRIT integration**
 
   Keep PyRIT-specific APIs behind these local interfaces so dependency upgrades do not change the attack corpus or report schema. Use base64, ROT13, and letter-by-letter converters explicitly and preserve converter lineage in each result.
 
-- [ ] **Step 4: Run component tests**
+- [x] **Step 4: Run component tests**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_pyrit_components.py -q`
 
   Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/pyrit 01-ai-red-teaming-lab/tests
