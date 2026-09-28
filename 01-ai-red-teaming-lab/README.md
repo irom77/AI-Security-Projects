@@ -6,8 +6,8 @@ separates a professional assessment from a one-off clever prompt.
 See the [implementation plan](../docs/superpowers/plans/2026-09-28-ai-red-teaming-lab.md) for the
 planned build sequence and verification steps.
 
-**Status:** In progress — 7 of 10 implementation tasks complete. Next: Task 8, mitigation
-controls and the retest loop.
+**Status:** In progress — 8 of 10 implementation tasks complete. Next: Task 9, CI automation and
+reproducible run metadata.
 
 ## Business Scenario
 

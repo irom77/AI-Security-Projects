@@ -46,6 +46,7 @@ class FindingRecord:
     confidence: str = "low"
     matched_indicators: list[str] | None = None
     severity: str = ""
+    mode: str = "unknown"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

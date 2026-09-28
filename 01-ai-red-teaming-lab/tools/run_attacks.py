@@ -17,7 +17,7 @@ def _safe_component(value: str) -> str:
 
 
 def run_attack_cases(
-    base_url: str, cases: list[AttackCase], run_id: str, tool: str
+    base_url: str, cases: list[AttackCase], run_id: str, tool: str, mode: str = "vulnerable"
 ) -> list[FindingRecord]:
     settings = Settings()
     safe_run_id = _safe_component(run_id)
@@ -63,6 +63,7 @@ def run_attack_cases(
                         confidence=score.confidence,
                         matched_indicators=score.matched_indicators,
                         severity=case.severity,
+                        mode=mode,
                     )
                 )
             except httpx.TimeoutException as exc:
@@ -90,6 +91,7 @@ def run_attack_cases(
                         confidence="high",
                         matched_indicators=[],
                         severity=case.severity,
+                        mode=mode,
                     )
                 )
             except (httpx.HTTPError, ValueError, KeyError) as exc:
@@ -117,6 +119,7 @@ def run_attack_cases(
                         confidence="high",
                         matched_indicators=[],
                         severity=case.severity,
+                        mode=mode,
                     )
                 )
     return records
@@ -140,7 +143,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--tool", default="local-runner")
     args = parser.parse_args(argv)
     cases = load_attack_cases(args.case_file)
-    records = run_attack_cases(args.base_url, cases, args.run_id, args.tool)
+    records = run_attack_cases(args.base_url, cases, args.run_id, args.tool, args.mode)
     _write_jsonl(args.output, records)
     return 1 if any(
         (record.status if isinstance(record, FindingRecord) else record.get("status")) in {"fail", "error"}

@@ -351,32 +351,37 @@ CLI JSONL outputs, and component tests implemented and verified.
 - `build_system_prompt(settings)` supports vulnerable and controlled modes, with secret removal from the controlled prompt.
 - `run_attacks.py` accepts `--mode` and produces comparable baseline/retest records.
 
-- [ ] **Step 1: Write failing control tests**
+- [x] **Step 1: Write failing control tests**
 
   Assert controlled mode rejects or safely routes direct injection, encoded requests, role-play jailbreaks, prompt-extraction attempts, and secret-bearing output; assert normal support questions remain usable. Verify the controlled system prompt contains no fake secret.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_guardrails.py -q`
 
   Expected: FAIL because controls are not implemented.
 
-- [ ] **Step 3: Implement layered controls**
+- [x] **Step 3: Implement layered controls**
 
   Add input classification, system-prompt hardening, removal of secrets from the controlled prompt, and output secret/unsafe-content filtering. Treat filters as defense-in-depth; do not claim that keyword matching proves general jailbreak resistance.
 
-- [ ] **Step 4: Run the same corpus before and after controls**
+- [x] **Step 4: Run the same corpus before and after controls**
 
   Run baseline and controlled runs with identical case IDs, then generate a comparison report showing vulnerable result, control, retest result, and residual risk for every finding.
 
   Expected: known deterministic disclosures are blocked in controlled mode; any remaining or ambiguous cases are explicitly recorded for review.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/app 01-ai-red-teaming-lab/tests 01-ai-red-teaming-lab/docs 01-ai-red-teaming-lab/results
   git commit -m "feat: add red team controls and retest evidence"
   ```
+
+**Status:** Complete — layered controls, controlled prompt hardening, mode-tagged comparable
+baseline/retest evidence, and documented residual risk implemented and verified. The deterministic
+baseline ran 8 cases with 2 failures and 6 review-required results; the identical controlled retest
+ran all 8 cases as passes with matching case IDs.
 
 ### Task 9: Add CI automation and reproducible run metadata
 

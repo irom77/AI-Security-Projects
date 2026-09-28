@@ -13,7 +13,7 @@ translation is not.
 
 | # | Project | Focus | OWASP LLM Top 10 | Status |
 |---|---------|-------|-------------------|--------|
-| 1 | [Automated AI Red-Teaming Lab](01-ai-red-teaming-lab/README.md) | Attack a chatbot with Garak + PyRIT, automate in CI | LLM01, LLM02, LLM07 | In progress — 7/10 tasks complete; next: Task 8 |
+| 1 | [Automated AI Red-Teaming Lab](01-ai-red-teaming-lab/README.md) | Attack a chatbot with Garak + PyRIT, automate in CI | LLM01, LLM02, LLM07 | In progress — 8/10 tasks complete; next: Task 9 |
 | 2 | [Secure RAG Application](02-secure-rag-application/README.md) | Threat-model and attack a retrieval pipeline | LLM01, LLM02, LLM08 | Planned |
 | 3 | [Secure AI Agent](03-secure-ai-agent/README.md) | Break and re-architect a tool-using agent | LLM01, LLM06, LLM07 | Planned |
 | 4 | [AI Security Monitoring & Detection Lab](04-ai-security-monitoring/README.md) | Detect misuse across the systems above | LLM01, LLM02, LLM06 | Planned |
