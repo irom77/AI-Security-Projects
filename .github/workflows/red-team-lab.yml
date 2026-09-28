@@ -1,0 +1,102 @@
+name: AI red-team lab
+
+on:
+  push:
+    paths:
+      - "01-ai-red-teaming-lab/**"
+      - ".github/workflows/red-team-lab.yml"
+  pull_request:
+    paths:
+      - "01-ai-red-teaming-lab/**"
+      - ".github/workflows/red-team-lab.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  required-regression:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 01-ai-red-teaming-lab
+    env:
+      MODEL_BACKEND: fake
+      MODEL_NAME: ci-deterministic-model
+      ENABLE_GUARDRAILS: "true"
+      NORTHWIND_CHATBOT_URL: http://127.0.0.1:8000
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: 01-ai-red-teaming-lab/pyproject.toml
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install deterministic dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[test]"
+          npm install --global promptfoo@0.123.1
+
+      - name: Run unit tests
+        run: python -m pytest -q
+
+      - name: Start deterministic target
+        run: |
+          python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > /tmp/northwind-uvicorn.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl --fail --silent "$NORTHWIND_CHATBOT_URL/health" && break
+            sleep 1
+          done
+
+      - name: Collect run metadata
+        run: |
+          python tools/collect_run_metadata.py \
+            --output results/ci-metadata.json \
+            --mode controlled \
+            --model "$MODEL_NAME" \
+            --backend "$MODEL_BACKEND" \
+            --command "python -m pytest -q" \
+            --command "python tools/run_attacks.py --mode controlled --output results/ci-run.jsonl" \
+            --command "promptfoo eval -c promptfoo/promptfooconfig.yaml --no-cache"
+
+      - name: Run bounded controlled attack corpus
+        run: |
+          python tools/run_attacks.py \
+            --base-url "$NORTHWIND_CHATBOT_URL" \
+            --mode controlled \
+            --output results/ci-run.jsonl \
+            --run-id "ci-${GITHUB_RUN_ID}"
+          python -c 'import json; from pathlib import Path; records=[json.loads(line) for line in Path("results/ci-run.jsonl").read_text().splitlines() if line]; blocking=[r for r in records if r.get("status") in {"fail", "error"} or r.get("mode") != "controlled"]; print(f"controlled findings: {len(blocking)} blocking"); raise SystemExit(1 if blocking else 0)'
+
+      - name: Run Promptfoo regression suite
+        run: promptfoo eval -c promptfoo/promptfooconfig.yaml --no-cache
+
+      - name: Upload red-team results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: red-team-results-${{ github.run_id }}
+          path: 01-ai-red-teaming-lab/results/
+          if-no-files-found: warn
+
+  optional-live-tools:
+    if: ${{ vars.ENABLE_LIVE_RED_TEAM_TOOLS == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run optional Garak and PyRIT jobs when configured
+        working-directory: 01-ai-red-teaming-lab
+        run: |
+          if command -v garak >/dev/null 2>&1; then ./garak/run_garak.sh; else echo "Garak not installed; optional job skipped"; fi
+          if command -v pyrit >/dev/null 2>&1; then python pyrit/run_pyrit.py; else echo "PyRIT not installed; optional job skipped"; fi

@@ -6,8 +6,8 @@ separates a professional assessment from a one-off clever prompt.
 See the [implementation plan](../docs/superpowers/plans/2026-09-28-ai-red-teaming-lab.md) for the
 planned build sequence and verification steps.
 
-**Status:** In progress — 8 of 10 implementation tasks complete. Next: Task 9, CI automation and
-reproducible run metadata.
+**Status:** In progress — 9 of 10 implementation tasks complete. Next: Task 10, the assessment,
+executive summary, and demo.
 
 ## Business Scenario
 
@@ -60,6 +60,11 @@ For each attempt, record not just pass/fail but **why the control failed**.
    PyRIT.
 4. **CI automation** — wire a subset of probes into GitHub Actions so they rerun whenever the
    model, system prompt or guardrails change.
+
+The required CI job uses the deterministic fake backend, records commit/model/tool/corpus metadata
+in `results/ci-metadata.json`, runs the bounded controlled corpus and Promptfoo, and uploads all
+results as an artifact. Garak and PyRIT remain an explicitly optional live-tools job so unavailable
+external model dependencies do not make the required regression gate flaky.
 
 ## Findings Mapping (OWASP Top 10 for LLM Applications)
 

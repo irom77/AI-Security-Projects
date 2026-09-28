@@ -385,6 +385,10 @@ ran all 8 cases as passes with matching case IDs.
 
 ### Task 9: Add CI automation and reproducible run metadata
 
+**Status:** Complete — required deterministic CI checks, optional live-tool job separation,
+controlled-mode blocking handling, artifact upload, and reproducible run metadata collection are
+implemented and reviewed.
+
 **Files:**
 - Create: `.github/workflows/red-team-lab.yml`
 - Create: `01-ai-red-teaming-lab/tools/collect_run_metadata.py`
@@ -396,27 +400,30 @@ ran all 8 cases as passes with matching case IDs.
 - CI starts deterministic target mode, runs unit tests, Promptfoo, the bounded normalized runner, and optional Garak/PyRIT jobs when their dependencies are available.
 - CI uploads `results/` as artifacts and fails on blocking controlled-mode findings.
 
-- [ ] **Step 1: Write CI contract tests**
+- [x] **Step 1: Write CI contract tests**
 
   Parse the workflow and assert path filters, Python/Node setup, test command, deterministic target startup, artifact upload, and blocking-result handling.
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
   Run: `cd 01-ai-red-teaming-lab && pytest tests/test_ci_contract.py -q`
 
   Expected: FAIL because the workflow and metadata tool are absent.
 
-- [ ] **Step 3: Implement workflow and metadata collection**
+- [x] **Step 3: Implement workflow and metadata collection**
 
   Record commit SHA, target mode, model/backend, tool versions, case-corpus hash, timestamp, and command lines. Keep live Ollama jobs separate from deterministic required checks so CI is reliable and reproducible.
 
-- [ ] **Step 4: Validate locally**
+- [x] **Step 4: Validate locally**
 
   Run: `cd 01-ai-red-teaming-lab && pytest -q`
 
   Expected: PASS, with the workflow contract test confirming the CI surface.
 
-- [ ] **Step 5: Commit**
+  Verified with `.venv/bin/pytest tests/test_ci_contract.py -q` (`2 passed`) and
+  `.venv/bin/pytest -q` (`43 passed, 1 warning`).
+
+- [x] **Step 5: Commit**
 
   ```bash
   git add .github/workflows/red-team-lab.yml 01-ai-red-teaming-lab/tools 01-ai-red-teaming-lab/tests 01-ai-red-teaming-lab/README.md
