@@ -7,3 +7,5 @@ results/**/*.json
 results/**/*.log
 results/**/*.txt
 results/**/*.html
+!results/sample/
+!results/sample/**

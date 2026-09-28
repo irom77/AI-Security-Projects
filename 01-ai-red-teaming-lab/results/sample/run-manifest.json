@@ -1,0 +1,14 @@
+{
+  "target": "http://127.0.0.1:8010",
+  "backend": "fake",
+  "model": "fake-northwind",
+  "baseline": "results/sample/baseline.jsonl",
+  "controlled_retest": "results/sample/retest.jsonl",
+  "health_check": "results/sample/health-vulnerable.json",
+  "tool_specific": {
+    "pyrit": "results/sample/pyrit/findings.jsonl",
+    "garak": "not run: optional dependency was not installed",
+    "promptfoo": "results/promptfoo/latest.json"
+  },
+  "safety_note": "All target data is fictional and local-only; no real credentials were used."
+}
