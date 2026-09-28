@@ -432,6 +432,9 @@ implemented and reviewed.
 
 ### Task 10: Write the assessment, executive summary, and demo instructions
 
+**Status:** Complete — report validation, deterministic sample artifacts, assessment, executive
+summary, demo script, and README checklist are implemented and reviewed.
+
 **Files:**
 - Create: `01-ai-red-teaming-lab/report/assessment.md`
 - Create: `01-ai-red-teaming-lab/report/executive-summary.md`
@@ -444,25 +447,25 @@ implemented and reviewed.
 - The executive summary is one page and written for a business audience.
 - The demo script runs the target, shows one baseline attack, shows the control, reruns the identical case, and points to CI artifacts without exposing real credentials.
 
-- [ ] **Step 1: Add report validation checks**
+- [x] **Step 1: Add report validation checks**
 
   Add a lightweight test or script that verifies every finding ID in the normalized results appears in the assessment and that all three OWASP categories plus MITRE ATLAS mappings are represented.
 
-- [ ] **Step 2: Generate sample artifacts from deterministic mode**
+- [x] **Step 2: Generate sample artifacts from deterministic mode**
 
   Run baseline, tool-specific, controlled, and retest commands; save only sanitized, reviewable outputs under `results/`.
 
-- [ ] **Step 3: Write the three portfolio documents**
+- [x] **Step 3: Write the three portfolio documents**
 
   Use evidence links rather than unsupported claims, disclose deterministic-versus-live-model limitations, and identify what still requires human validation.
 
-- [ ] **Step 4: Update the README checklist and run the full verification**
+- [x] **Step 4: Update the README checklist and run the full verification**
 
   Run: `cd 01-ai-red-teaming-lab && pytest -q`
 
   Then execute the documented local demo command sequence and verify the generated artifacts are readable from a clean checkout.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
   ```bash
   git add 01-ai-red-teaming-lab/report 01-ai-red-teaming-lab/results 01-ai-red-teaming-lab/README.md

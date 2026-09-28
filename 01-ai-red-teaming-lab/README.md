@@ -6,8 +6,8 @@ separates a professional assessment from a one-off clever prompt.
 See the [implementation plan](../docs/superpowers/plans/2026-09-28-ai-red-teaming-lab.md) for the
 planned build sequence and verification steps.
 
-**Status:** In progress — 9 of 10 implementation tasks complete. Next: Task 10, the assessment,
-executive summary, and demo.
+**Status:** Complete — all 10 implementation tasks are complete, including the assessment,
+executive summary, demo script, and reviewable sample artifacts.
 
 ## Business Scenario
 
@@ -85,10 +85,10 @@ result. The retest evidence is the deliverable, not the fix itself.
 - [ ] Chatbot code + system prompt (with fake secret) in `app/`
 - [ ] Garak hit-log and Promptfoo/PyRIT run outputs in `results/`
 - [ ] GitHub Actions workflow that reruns probes on change
-- [ ] Written assessment: scope, methodology, findings with evidence, risk ratings, affected
-      assets, recommended controls, retest results
-- [ ] Findings mapped to OWASP LLM01 / LLM02 / LLM07 and relevant [MITRE ATLAS](https://atlas.mitre.org/) techniques
-- [ ] Short recorded demo + one-page executive summary
+- [x] Written [assessment](report/assessment.md): scope, methodology, findings with evidence,
+      risk ratings, affected assets, recommended controls, retest results
+- [x] Findings mapped to OWASP LLM01 / LLM02 / LLM07 and relevant [MITRE ATLAS](https://atlas.mitre.org/) techniques
+- [x] [Demo script](report/demo-script.md) + [one-page executive summary](report/executive-summary.md)
 
 ## Tools & References
 
